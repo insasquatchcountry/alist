@@ -1,6 +1,8 @@
 # alist
 My solution to list out all of the apps installed on macOS from the app store, homebrew, or otherwise
 
+
+
 ## SAMPLE OUTPUT
 
 2025-01-23_AppList.txt
@@ -219,3 +221,18 @@ Tor Browser
 Transmission
 VLC
 ```
+## Other useful brew tool
+
+brew desc <formula>
+
+brew info <formula>
+
+brew deps <formula>
+
+brew uses --installed <formula>
+
+### source: https://github.com/orgs/Homebrew/discussions/4033#discussioncomment-4362170
+brew info --cask --json=v2 $(brew ls --cask) | jq -r '.casks[]|select(.auto_updates==true)|.token'
+
+### source: https://superuser.com/a/1851597/1170970
+brew list --leaves | fzf --cycle --tmux --preview 'brew info {}'  --info=inline-right --ellipsis=… --tabstop=4 --highlight-line
