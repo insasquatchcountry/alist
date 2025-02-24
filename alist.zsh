@@ -9,18 +9,19 @@ printf "%b" "\e[1;34m/__/     \__\ |_______||__| |_______/       |__|     \e[0m\
 printf "\033[1m Sauce: \e[1;31mhttps://github.com/insasquatchcountry/alist\e[0m\n%s"
 date
 
-# Function to check if a command exists
-check_command() {
-    if ! command -v "$1" &> /dev/null; then
-        printf "%s could not be found. Please install it to continue.\n" "$1"
-        exit 1
-    fi
-}
+# Check if brew is installed
+if ! command -v brew &> /dev/null; then
+    printf "\033[1m\e[1;31m ERROR: \e[0mHomebrew could not be found. Please install it to continue.\n"
+printf "For more info, visit → https://brew.sh\n"
+    return
+fi
 
-# Check if mas and brew are installed
-check_command mas
-check_command brew
-
+# Check if mas is installed
+if ! command -v mas &> /dev/null; then
+    printf "\033[1m\e[1;31m ERROR: \e[0mmas could not be found.\n" 
+printf "Please install it to continue → brew install mas\n"
+    return
+fi
 
 # Find Ambiguously Sourced Apps
 # Step 1: Get the list of installed App Store apps
