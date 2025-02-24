@@ -19,7 +19,8 @@ fi
 # Check if mas is installed
 if ! command -v mas &> /dev/null; then
     printf "\033[1m\e[1;31m ERROR: \e[0mmas could not be found.\n" 
-printf "Please install it to continue → brew install mas\n"
+printf "Please install it to continue → brew install mas\n\n"
+brew info mas
     return
 fi
 
