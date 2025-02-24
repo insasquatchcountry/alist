@@ -78,80 +78,28 @@ mas list | while IFS= read -r line; do
         app_url=$(echo "$app_info" | grep -o 'https://apps.apple.com[^ ]*')
         if [ -n "$app_url" ]; then
             # Print the app name and URL in the desired format
-            printf "%s (App Store): %s\n" "$app_name" "$app_url"
+            printf "%-20s %s\n" "$app_name" "$app_url"
         else
-            printf "%s (App Store): URL not found\n" "$app_name"
+            printf "%s URL not found\n" "$app_name"
         fi
     else
-        printf "%s (App Store): Not found (likely an older version than is currently available in the app store)\n" "$app_name"
+        printf "%-20s Not found - likely an older version than is currently available in the app store%s\n" "$app_name"
     fi
 done | sort  # Sort the output alphabetically
 
-# Print a new line
-printf "\n"
-printf "\033[1mHomebrew🍺 Casks and Leaves:\033[0m\n%s"
+printf "\n\033[1mHomebrew🍺 Casks:\033[0m\n%s"
+brew info -q --json=v2 $(brew ls --cask -q) | jq -r '.casks[] | [.token, .homepage] | @tsv' | column -t
+# alt for spaces instead of columns
+# brew info -q --json=v2 $(brew ls --cask -q) | jq -r '.casks[] | [.token, .homepage] | @tsv' | awk -v OFS=' ' '{ print $1, $2 }'
 
-# Get the list of installed casks
-casks=$(brew list --cask)
+printf "\n\033[1mHomebrew🍺 Leaves:\033[0m\n%s"
+brew info -q --json=v2 $(brew leaves) | jq -r '.formulae[] | [.full_name, .homepage] | @tsv' | column -t
+# alt for spaces instead of columns
+# brew info -q --json=v2 $(brew leaves) | jq -r '.formulae[] | [.full_name, .homepage] | @tsv' | awk -v OFS=' ' '{ print $1, $2 }'
 
-# Get the list of leaves (non-cask formulae)
-leaves=$(brew leaves)
-
-# Combine both lists into one
-combined_list=$(echo "$casks"; echo "$leaves")
-
-# Initialize an array to hold the brew home commands
-brew_home_commands=()
-
-# Loop through each item in the combined list
-while IFS= read -r item; do
-    # Check if the item is a valid cask
-    if brew list --cask | grep -q "^$item\$"; then
-        # Get the homepage URL for the cask, suppressing warnings
-        homepage=$(brew info --cask "$item" 2>/dev/null | sed -n '2p')  # Get the second line which contains the URL
-        if [ -n "$homepage" ]; then
-            printf "%s (Cask): %s\n" "$item" "$homepage"
-            brew_home_commands+=("$item")
-        else
-            printf "%s (Cask): Not found or no homepage available\n" "$item"
-        fi 
-    # Check if the item is a valid formula
-    elif brew list --formula | grep -q "^$item\$"; then
-        # Get the homepage URL for the formula, suppressing warnings
-        homepage=$(brew info "$item" 2>/dev/null | sed -n '3p')  # Get the third line which contains the URL
-        homepage=$(echo "$homepage" | awk '{print $1}')  # Extract the URL part
-        if [[ "$homepage" == "http"* ]]; then
-            printf "%s (Formula): %s\n" "$item" "$homepage"
-            brew_home_commands+=("$item")
-        else
-            printf "%s (Formula): No homepage available\n" "$item"
-        fi
-    # Check if the item is a valid formula from a tap
-    elif brew info "$item" &>/dev/null; then
-        homepage=$(brew info "$item" 2>/dev/null | sed -n '3p')  # Get the third line which contains the URL
-        homepage=$(echo "$homepage" | awk '{print $1}')  # Extract the URL part
-        if [[ "$homepage" == "http"* ]]; then
-            printf "%s (Tapped Formula): %s\n" "$item" "$homepage"
-            brew_home_commands+=("$item")
-        else
-            printf "%s (Tapped Formula): No homepage available\n" "$item"
-        fi
-    else
-        printf "%s: Not found\n" "$item"
-    fi
-done <<< "$combined_list"
 
 # Print the command to open all homepages
-if [ ${#brew_home_commands[@]} -gt 0 ]; then
-    printf "\n"
-    printf "\033[1m⚠️ FYI this could be \e[1;31mA LOT\e[0m of tabs so... you've been warned 👀\n%s"
-    printf "\033[1mTo open all of these homepages in your browser, copy and paste and run this command:\033[0m\n%s"
-    printf "brew home ${brew_home_commands[*]}\n"
-else
-    printf "\n"
-    printf "\033[1mNo valid casks or formulas found.\033[0m\n%s"
-fi
-
-# this last part could likel be replace with 
-# printf "brew home $((brew list --cask; brew leaves) | tr '\n' ' ' )\n"
-# Also if I can have it curl the info for all the casks and formula at once, that greatly reduce runtime
+printf "\n"
+printf "\033[1m⚠️ FYI this could be \e[1;31mA LOT\e[0m of tabs so... you've been warned 👀\n%s"
+printf "\033[1mTo open all of these homepages in your browser, copy and paste and run this command:\033[0m\n%s"
+printf "brew home $((brew list --cask; brew leaves) | tr '\n' ' ' )\n"
