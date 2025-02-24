@@ -6,10 +6,8 @@ printf "%b" "\e[1;34m   /  ^  \    |  |     |  |    |   (----'---|  |----'\e[0m\
 printf "%b" "\e[1;34m  /  /_\  \   |  |     |  |     \   \       |  |     \e[0m\n"
 printf "%b" "\e[1;34m /  _____  \  |  '----.|  | .----)   |      |  |     \e[0m\n"
 printf "%b" "\e[1;34m/__/     \__\ |_______||__| |_______/       |__|     \e[0m\n\n"
+printf "\033[1m Sauce: \e[1;31mhttps://github.com/insasquatchcountry/alist\e[0m\n%s"
 date
-
-# brew list --cask | tr '\n' ' ' | xargs brew home && brew leaves | tr '\n' ' ' | xargs brew home
-# the above will open a the home page of all the apps installed via homebrew
 
 # Function to check if a command exists
 check_command() {
