@@ -1,11 +1,12 @@
 # alist
-My solution to list out all of the apps installed on macOS from the app store, homebrew, or otherwise
+My solution to list out all of the apps installed on macOS from the app store, homebrew, and otherwise...
 
 
 
-## SAMPLE OUTPUT
+## [Click here to see sameple terminal output](/alist_output.pdf)
 
-2025-01-23_AppList.txt
+👎 Not-as-fancy standard .txt output 🤢 
+
 
 ```
 ⚠️ Apps In Applications Folder With Sources Unclear:
