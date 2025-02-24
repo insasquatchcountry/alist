@@ -5,7 +5,7 @@ printf "%b" "\e[1;34m    /   \     |  |     |  |     /       |           |\e[0m\
 printf "%b" "\e[1;34m   /  ^  \    |  |     |  |    |   (----'---|  |----'\e[0m\n"
 printf "%b" "\e[1;34m  /  /_\  \   |  |     |  |     \   \       |  |     \e[0m\n"
 printf "%b" "\e[1;34m /  _____  \  |  '----.|  | .----)   |      |  |     \e[0m\n"
-printf "%b" "\e[1;34m/__/     \__\ |_______||__| |_______/       |__|     \e[0m\n\n"
+printf "%b" "\e[1;34m/__/     \__\ |_______||__| |_______/       |__|     \e[0m\n"
 printf "\033[1m Sauce: \e[1;31mhttps://github.com/insasquatchcountry/alist\e[0m\n%s"
 date
 
