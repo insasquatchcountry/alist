@@ -1,5 +1,13 @@
 #!/bin/zsh
 
+printf "%b" "\e[1;34m     ___       __       __       _______.___________.\e[0m\n"
+printf "%b" "\e[1;34m    /   \     |  |     |  |     /       |           |\e[0m\n"
+printf "%b" "\e[1;34m   /  ^  \    |  |     |  |    |   (----'---|  |----'\e[0m\n"
+printf "%b" "\e[1;34m  /  /_\  \   |  |     |  |     \   \       |  |     \e[0m\n"
+printf "%b" "\e[1;34m /  _____  \  |  '----.|  | .----)   |      |  |     \e[0m\n"
+printf "%b" "\e[1;34m/__/     \__\ |_______||__| |_______/       |__|     \e[0m\n\n"
+date
+
 # brew list --cask | tr '\n' ' ' | xargs brew home && brew leaves | tr '\n' ' ' | xargs brew home
 # the above will open a the home page of all the apps installed via homebrew
 
@@ -51,7 +59,7 @@ minus_store_and_brew=$(echo "$normalized_applications_folder" | grep -v -F -f <(
 final_minus_store_and_brew=$(echo "$minus_store_and_brew" | sed 's/_/ /g')
 
 # Output the results
-printf "\033[1m⚠️ Apps In Applications Folder With \e[1;31mSources Unclear\e[0m:\n%s\n\n" "$final_minus_store_and_brew"
+printf "\n\033[1m⚠️ Apps In Applications Folder With \e[1;31mSources Unclear\e[0m:\n%s\n\n" "$final_minus_store_and_brew"
 
 
 # Get the list of installed App Store apps first
