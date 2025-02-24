@@ -101,5 +101,5 @@ brew info -q --json=v2 $(brew leaves) | jq -r '.formulae[] | [.full_name, .homep
 # Print the command to open all homepages
 printf "\n"
 printf "\033[1m⚠️ FYI this could be \e[1;31mA LOT\e[0m of tabs so... you've been warned 👀\n%s"
-printf "\033[1mTo open all of these homepages in your browser, copy and paste and run this command:\033[0m\n%s"
-printf "brew home $((brew list --cask; brew leaves) | tr '\n' ' ' )\n"
+printf "\033[1mTo open all of these homepages in your browser, copy and paste and run this command:\033[0m\n\n%s"
+printf "brew home $((brew list --cask; brew leaves) | tr '\n' ' ' )\n\n"
