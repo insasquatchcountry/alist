@@ -1,5 +1,5 @@
 # alist
-My solution to list out all of the apps installed on macOS from the app store, homebrew, and elsewhere...
+A script that lists out all of the apps installed on macOS from the app store, homebrew, and elsewhere...
 ___
 
 Just copy and paste this into your terminal then press enter... go on, you can trust me😉
@@ -133,7 +133,7 @@ This script provides a user-friendly way to download, prepare, and execute the `
 # Sample Output
 (see .pdf for clickable links etc.)
 
-![Sample Output](.png)
+![Sample Output](alist_output.png)
 
 
 
