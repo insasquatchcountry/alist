@@ -2,7 +2,7 @@
 My solution to list out all of the apps installed on macOS from the app store, homebrew, and otherwise...
 ___
 
-copy and paste this into your terminal then press enter ... go on, you can trust me 😉
+Just copy and paste this into your terminal then press enter... go on, you can trust me😉
 
 
 ``` bash
