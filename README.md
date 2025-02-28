@@ -12,6 +12,7 @@ RED="\033[31m"
 ORANGE="\033[38;5;208m"
 RESET="\033[0m"
 
+clear && printf "%s\n\n" "**************************************************************"
 # Download the script
 curl -s -o alist.zsh https://raw.githubusercontent.com/insasquatchcountry/alist/refs/heads/main/alist.zsh
 if [ $? -ne 0 ]; then
@@ -28,12 +29,19 @@ fi
 
 # Prompt for confirmation before running the script
 printf "${BOLD}The script alist.zsh has been downloaded and is ready to run.${RESET}\n"
-printf "${ORANGE}Do you want to continue? (y/n): ${RESET}"
+printf "\n"
+printf "${ORANGE}            Do you wish to continue? (y/n): ${RESET}"
 read confirmation
 if [[ ! "$confirmation" =~ ^[Yy]$ ]]; then
+    printf "\n"
     printf "Script execution canceled.\n"
+    printf "\n"
+    printf "%s\n" "**************************************************************"
     return
 fi
+
+printf "\n"
+printf "%s\n" "**************************************************************"
 
 # Run the script
 ./alist.zsh
