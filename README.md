@@ -130,5 +130,10 @@ fi
 
 This script provides a user-friendly way to download, prepare, and execute the `alist.zsh` script while incorporating error handling and user confirmation. The use of color formatting enhances the visibility of important messages, making it easier for users to understand the script's status and any issues that may arise.
 
+# Sample Output
+(see .pdf for clickable links etc.)
+
+![Sample Output](alist_output.png)
+
 
 
