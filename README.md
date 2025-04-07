@@ -2,6 +2,46 @@
 A script that lists out all of the apps installed on macOS from the app store, homebrew, and elsewhere...
 ___
 
+⛔️ 2025-04-07 - As of macOS Sequoia 15.4 the mas cli tool used to get app store info is doa but I found a [script]([url](https://github.com/mas-cli/mas/issues/724#issuecomment-2778539607)) that may replace this dependacey.
+
+```bash
+#!/bin/bash
+# Source: https://github.com/mas-cli/mas/issues/724#issuecomment-2778539607
+/usr/bin/mdfind -onlyin /Applications 'kMDItemAppStoreHasReceipt=1' -0 \
+  | /usr/bin/xargs -0 /usr/bin/mdls -attr kMDItemAppStoreAdamID -attr kMDItemDisplayName \
+  | while read -r id_line; do
+      id=${id_line#*= }
+      read -r name_line
+      name=${name_line#*= }
+      echo "App Store $name, id: $id"
+done | /usr/bin/sort
+```
+output: 
+```
+App Store "Accelerate.app", id: 1459809092
+App Store "AdGuard for Safari.app", id: 1440147259
+App Store "Any File Info.app", id: 731859284
+App Store "Bonjourr Startpage.app", id: 1615431236
+App Store "DaVinci Resolve.app", id: 571213070
+App Store "Desk Clock.app", id: 1253066126
+App Store "FlipClock.app", id: 1181028777
+App Store "FormApp.app", id: 1544827472
+App Store "Image2Icon.app", id: 992115977
+App Store "Noir.app", id: 1592917505
+App Store "Notify for Spotify.app", id: 1517312650
+App Store "Numbers.app", id: 409203825
+App Store "Pages.app", id: 409201541
+App Store "Pixelmator Pro.app", id: 1289583905
+App Store "Pure Paste.app", id: 1611378436
+App Store "ScreenFlow 9.app", id: 1475796517
+App Store "Swift Playground.app", id: 1496833156
+App Store "Trello.app", id: 1278508951
+App Store "Userscripts.app", id: 1463298887
+App Store "Wake Up Time Pro.app", id: 516371849
+App Store "Xcode.app", id: 497799835
+```
+
+___
 Just copy and paste this into your terminal then press enter... go on, you can trust me😉
 
 
